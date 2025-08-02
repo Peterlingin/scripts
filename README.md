@@ -4,11 +4,13 @@ A bunch of scripts that don’t do anything especially useful—just a fun way t
 ---
 
 **GenerateDummyText**
+
 A PowerShell script for generating dummy text. Use the -Length parameter to set how long the text should be.
 
 ---
 
 **Magic8Ball**
+
 A virtual Magic 8-Ball written in PowerShell. Just like the classic plastic toy—minus the plastic. You can even enter a name to get a personalized answer.
 
 Is it useful? Not really. Is it fun? Absolutely.
