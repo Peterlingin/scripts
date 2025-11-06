@@ -29,7 +29,7 @@ A simple PowerShell script that converts the first letter of each word in a phra
 
 1. Run the script:
    ```powershell
-   .\nato-phonetic-converter.ps1
+   .\NATOspell.ps1
    ```
 
 2. Enter your phrase when prompted:
