@@ -25,8 +25,7 @@ A PowerShell script that spits out random quotes in classic President Trump styl
 
 **NATO Phonetic Alphabet Converter**
 
-A simple PowerShell script that converts the first letter of each word in a phrase to its NATO phonetic alphabet equivalent. This script takes a phrase as input and transforms the initial letter of every word into the corresponding NATO phonetic alphabet code word. It's useful for clear communication, radio operations, spelling out acronyms, or just having fun with military-style phonetics.
-* Usage *
+A simple PowerShell script that converts the first letter of each word in a phrase to its NATO phonetic alphabet equivalent. This script takes a phrase as input and transforms the initial letter of every word into the corresponding NATO phonetic alphabet code word. It's useful for clear communication, radio operations, spelling out acronyms, or just having fun with military-style phonetics. Usage:
 
 1. Run the script:
    ```powershell
