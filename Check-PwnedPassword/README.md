@@ -143,10 +143,6 @@ The Have I Been Pwned API is free but has rate limits. If you need to check many
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-
-[MIT License](LICENSE) - Feel free to use and modify as needed.
-
 ## Acknowledgments
 
 - [Troy Hunt](https://www.troyhunt.com/) for creating and maintaining [Have I Been Pwned](https://haveibeenpwned.com/)
