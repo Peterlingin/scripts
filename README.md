@@ -26,7 +26,7 @@ A PowerShell script that spits out random quotes in classic President Trump styl
 **NATO Phonetic Alphabet Converter**
 
 A simple PowerShell script that converts the first letter of each word in a phrase to its NATO phonetic alphabet equivalent. This script takes a phrase as input and transforms the initial letter of every word into the corresponding NATO phonetic alphabet code word. It's useful for clear communication, radio operations, spelling out acronyms, or just having fun with military-style phonetics.
-## Usage
+* Usage *
 
 1. Run the script:
    ```powershell
@@ -44,18 +44,4 @@ A simple PowerShell script that converts the first letter of each word in a phra
    Hotel - Whiskey
    ```
 
-## Examples
-
-| Input | Output |
-|-------|--------|
-| `Hello World` | `Hotel - Whiskey` |
-| `Quick Brown Fox` | `Quebec - Bravo - Foxtrot` |
-| `PowerShell Script` | `Papa - Sierra` |
-| `ABC Company` | `Alpha - Bravo - Charlie - Charlie` |
-
-## NATO Phonetic Alphabet Reference
-
-The script uses the standard NATO phonetic alphabet:
-
-A - Alpha, B - Bravo, C - Charlie, D - Delta, E - Echo, F - Foxtrot, G - Golf, H - Hotel, I - India, J - Juliett, K - Kilo, L - Lima, M - Mike, N - November, O - Oscar, P - Papa, Q - Quebec, R - Romeo, S - Sierra, T - Tango, U - Uniform, V - Victor, W - Whiskey, X - X-ray, Y - Yankee, Z - Zulu
 
