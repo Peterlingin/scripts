@@ -29,7 +29,7 @@ Simply download the script or copy the function into your PowerShell profile.
 
 ```powershell
 # Download the script
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/yourusername/check-pwnedpassword/main/Check-PwnedPassword.ps1" -OutFile "Check-PwnedPassword.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Peterlingin/scripts/refs/heads/main/Check-PwnedPassword/Check-PwnedPassword.ps1" -OutFile "Check-PwnedPassword.ps1"
 
 # Run it
 .\Check-PwnedPassword.ps1
