@@ -127,9 +127,9 @@ function Test-PwnedPassword {
                     Write-Host "`nWARNING: This password has been found in data breaches!" -ForegroundColor Red
                     Write-Host "It is strongly recommended to change this password immediately.`n" -ForegroundColor Yellow
                 } else {
-                    Write-Host "`n==================== RESULT ====================" -ForegroundColor Green
+                    Write-Host "`n========================== RESULT ============================" -ForegroundColor Green
                     Write-Host "Good news! This password was NOT found in known data breaches." -ForegroundColor Green
-                    Write-Host "===============================================`n" -ForegroundColor Green
+                    Write-Host "==============================================================`n" -ForegroundColor Green
                 }
             }
             
