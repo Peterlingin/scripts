@@ -141,7 +141,7 @@ The Have I Been Pwned API is free but has rate limits. If you need to check many
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome!
 
 ## Acknowledgments
 
@@ -154,4 +154,4 @@ This tool is provided as-is for security awareness and password checking purpose
 
 ---
 
-**⚠️ Important**: If you find that a password has been compromised, change it immediately on all services where you've used it. Consider using a password manager to generate and store unique, strong passwords for each service.
+**⚠️ Important**: If you find that a password has been compromised, change it immediately on all services where you've used it. Consider using a password manager to generate and store unique, strong passwords for each service. **Remember**: just because a password hasn’t been pwned doesn’t mean it’s secure.
