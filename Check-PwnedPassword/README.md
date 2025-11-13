@@ -21,7 +21,7 @@ A secure PowerShell function that checks if passwords have been compromised in k
 5. Searches locally for your full hash in the results
 6. Reports whether the password has been compromised and how many times
 
-**Your actual password never leaves your machine in plain text.**
+**Your actual password never leaves your machine in plain text. The Pwned Passwords API supports searching for passwords stored as either a SHA-1 or NTLM hash of a UTF-8–encoded password.**
 
 ## Installation
 
