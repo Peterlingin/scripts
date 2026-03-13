@@ -1,4 +1,4 @@
-# 🕵️ SecretHunt
+# SecretHunt
 
 A fast, zero-dependency Bash script that hunts for leaked secrets and credentials hiding in your shell history files. No setup, no installation. Just run it and find out what your terminal has been keeping from you.
 
@@ -58,8 +58,8 @@ By default, SecretHunt automatically scans all history files it can find for the
 | `-f` | `FILE` | *(auto)* | Scan a specific history file instead of the defaults |
 | `-s` | `SEVERITY` | `low` | Minimum severity to report: `low`, `medium`, or `high` |
 | `-o` | `FILE` | *(none)* | Save a CSV report to `FILE` |
-| `-q` | — | `false` | Quiet mode: suppress banner and summary, show findings only |
-| `-h` | — | — | Print help and exit |
+| `-q` | - | `false` | Quiet mode: suppress banner and summary, show findings only |
+| `-h` | - | - | Print help and exit |
 
 ---
 
@@ -67,7 +67,7 @@ By default, SecretHunt automatically scans all history files it can find for the
 
 SecretHunt uses **30 regex patterns** grouped into three severity levels, combined with **Shannon entropy scoring** on every match to help distinguish real secrets from placeholder values.
 
-### 🔴 High — Known secret formats
+### 🔴 High - Known secret formats
 
 Patterns that match the exact structure of real credentials issued by specific platforms:
 
@@ -86,7 +86,7 @@ Patterns that match the exact structure of real credentials issued by specific p
 - Bearer tokens in Authorization headers
 - Basic auth credentials embedded in URLs
 
-### 🟠 Medium — Generic credential assignments
+### 🟠 Medium - Generic credential assignments
 
 Patterns that match common variable naming conventions paired with non-trivial values:
 
@@ -97,7 +97,7 @@ Patterns that match common variable naming conventions paired with non-trivial v
 - SSH identity file flags (`-i file.pem`)
 - `curl` commands with `-u` or `--user` credentials
 
-### 🟡 Low — Suspicious environment variable usage
+### 🟡 Low - Suspicious environment variable usage
 
 Patterns that indicate credentials may have been passed via environment variables or shell exports:
 
@@ -118,11 +118,11 @@ Each finding is printed as a colour-coded block with the severity level, line nu
 ────────────────────────────────────────────────────────────
 Scanning: /home/user/.zsh_history
 
-  HIGH   Line 142 — AWS Access Key ID
+  HIGH   Line 142 - AWS Access Key ID
          aws configure set aws_access_key_id AKIAIOSFODNN7EXAMPLE
          Entropy: 4.31 bits  |  Match: AKIAIOSFODNN7EXAMPLE
 
-  MEDIUM Line 891 — Generic Password
+  MEDIUM Line 891 - Generic Password
          mysqldump -u root --password=Tr0ub4dor mydb > backup.sql
          Entropy: 3.76 bits  |  Match: password=Tr0ub4dor
 
@@ -133,7 +133,7 @@ Summary
   High: 3  |  Medium: 2  |  Low: 2
 ```
 
-**Entropy** is reported in bits using the Shannon entropy formula. Higher values indicate more randomness — a real API key typically scores above 3.5 bits, while a placeholder like `password=test` scores much lower.
+**Entropy** is reported in bits using the Shannon entropy formula. Higher values indicate more randomness - a real API key typically scores above 3.5 bits, while a placeholder like `password=test` scores much lower.
 
 ### CSV Report
 
@@ -165,22 +165,22 @@ A companion script `inject_test_secrets.sh` is provided to populate your history
 
 ## How It Works
 
-1. **Discover history files** — scans `~/.bash_history`, `~/.zsh_history`, and `~/.local/share/fish/fish_history` by default, or a custom file via `-f`.
-2. **Strip shell metadata** — fish history entries include timestamps in the format `: 1699999999:0;command` which are stripped before matching.
-3. **Match patterns** — each line is tested against all 30 patterns using bash's built-in `[[ =~ ]]` regex operator. No external processes are spawned per line.
-4. **Score entropy** — when a match is found, the matched string's Shannon entropy is calculated via `awk` to help assess whether the value looks like a real secret.
-5. **Report** — findings are printed to the terminal with colour-coded severity and optionally written to a CSV file.
-6. **Exit** — exits with code `0` if clean, `1` if any findings were detected.
+1. **Discover history files** - scans `~/.bash_history`, `~/.zsh_history`, and `~/.local/share/fish/fish_history` by default, or a custom file via `-f`.
+2. **Strip shell metadata** - fish history entries include timestamps in the format `: 1699999999:0;command` which are stripped before matching.
+3. **Match patterns** - each line is tested against all 30 patterns using bash's built-in `[[ =~ ]]` regex operator. No external processes are spawned per line.
+4. **Score entropy** - when a match is found, the matched string's Shannon entropy is calculated via `awk` to help assess whether the value looks like a real secret.
+5. **Report** - findings are printed to the terminal with colour-coded severity and optionally written to a CSV file.
+6. **Exit** - exits with code `0` if clean, `1` if any findings were detected.
 
 ### Performance design
 
 SecretHunt is designed to avoid the most common performance pitfalls in bash scripting:
 
-- All pattern matching uses bash's built-in `[[ =~ ]]` — no `grep` subshell per line
-- Severity filtering uses integer arithmetic — no subshells
-- String truncation uses bash parameter expansion (`${var:0:N}`) — no `cut` subshells
+- All pattern matching uses bash's built-in `[[ =~ ]]` - no `grep` subshell per line
+- Severity filtering uses integer arithmetic - no subshells
+- String truncation uses bash parameter expansion (`${var:0:N}`) - no `cut` subshells
 - Entropy is computed only when a match is found, not on every line
-- Fish timestamp stripping uses parameter expansion — no `sed` per line
+- Fish timestamp stripping uses parameter expansion - no `sed` per line
 
 On a modern machine, a 10,000-line history file scans in well under a second.
 
@@ -189,8 +189,8 @@ On a modern machine, a 10,000-line history file scans in well under a second.
 ## Limitations
 
 - **Regex-based detection** will produce false positives (innocent strings that look like secrets) and false negatives (real secrets that don't match any pattern). Entropy scoring helps reduce false positives but does not eliminate them.
-- **Obfuscated or encoded secrets** — base64-encoded credentials or secrets split across multiple commands will not be detected.
-- **In-memory secrets** — secrets that were set and used entirely within a single session without being written to history are not visible to this tool.
+- **Obfuscated or encoded secrets** - base64-encoded credentials or secrets split across multiple commands will not be detected.
+- **In-memory secrets** - secrets that were set and used entirely within a single session without being written to history are not visible to this tool.
 - **Not a replacement** for dedicated secret scanning tools like `truffleHog` or `gitleaks` when scanning codebases or git history.
 
 ---
