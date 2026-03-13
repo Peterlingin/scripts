@@ -8,7 +8,6 @@ A fast, zero-dependency Bash script that hunts for leaked secrets and credential
 
 - [Why It Exists](#why-it-exists)
 - [Requirements](#requirements)
-- [Installation](#installation)
 - [Usage](#usage)
 - [Options](#options)
 - [What It Detects](#what-it-detects)
@@ -39,20 +38,6 @@ SecretHunt finds them before someone else does.
 | `awk` | Used only for entropy calculation on matches |
 
 No other dependencies. No Python, no Node, no package manager.
-
----
-
-## Installation
-
-```bash
-# 1. Download the script
-
-# 2. Make it executable
-chmod +x secrethunt.sh
-
-# 3. Run it
-./secrethunt.sh
-```
 
 ---
 
