@@ -3,7 +3,7 @@ A bunch of scripts that don’t do anything especially useful. Just a fun way to
 
 - 🔒 **Check-PwnedPassword**: a secure PowerShell function that checks if passwords have been compromised in known data breaches.
 - 🛡️ **SSL Certificate Checker**: a Bash script that validates SSL/TLS certificates.
-- 🪵 **Log Volume Calculator**: a PowerShell script designed to help IT professionals storage requirements for log data.
+- 🪵 **Log Volume Calculator**: a PowerShell script designed to help IT professionals project storage requirements for log data.
 - 🧹 **SecretHunt**: a fast, zero-dependency Bash script that hunts for leaked secrets and credentials hiding in your shell history files.
 - 📊 **nparse**: a Bash script that parses Nmap plain-text output files and produces a clean, easy-to-read report.
 
