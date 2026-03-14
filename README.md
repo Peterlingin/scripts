@@ -1,5 +1,5 @@
 # scripts
-A bunch of scripts that don’t do anything especially useful—just a fun way to mess around and be a little creative.
+A bunch of scripts that don’t do anything especially useful. Just a fun way to mess around and be a little creative. Except for these, which are small but serious projects: Check-PwnedPassword, SSL Certificate Checker, SecretHunt, and nparse.sh.
 
 ---
 
