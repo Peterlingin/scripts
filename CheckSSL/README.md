@@ -1,4 +1,4 @@
-# 🔐 SSL Certificate Checker
+# SSL Certificate Checker
 
 A Bash script that validates SSL/TLS certificates for a list of domains read from a plain-text file, or interactively for a single domain passed directly on the command line. It reports expiry status with colour-coded output, supports per-domain custom ports, optional CSV export, and integrates cleanly into CI/CD pipelines.
 
