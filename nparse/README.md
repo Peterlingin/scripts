@@ -1,4 +1,4 @@
-# nparse.sh
+# nparse
 
 A simple Bash script that parses Nmap plain-text output files and produces a clean, easy-to-read report suitable for copying into a document.
 
