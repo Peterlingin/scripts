@@ -6,7 +6,7 @@ A bunch of scripts that don’t do anything especially useful. Just a fun way to
 - 🪵 **Log Volume Calculator**: a PowerShell script designed to help IT professionals project storage requirements for log data.
 - 🧹 **SecretHunt**: a fast, zero-dependency Bash script that hunts for leaked secrets and credentials hiding in your shell history files.
 - 📊 **nparse**: a Bash script that parses Nmap plain-text output files and produces a clean, easy-to-read report.
-- 🛡️ **FIM**: a lightweight, zero-dependency Bash script that detects unauthorised changes to critical system files.
+- 🛡️ **fim**: a lightweight, zero-dependency Bash script that detects unauthorised changes to critical system files.
 
 ---
 
