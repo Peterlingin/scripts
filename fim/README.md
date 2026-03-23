@@ -1,4 +1,4 @@
-# FIM — File Integrity Monitor
+# FIM - File Integrity Monitor
 
 A lightweight, zero-dependency Bash script that detects unauthorised changes to critical system files by comparing SHA-256 hashes against a trusted baseline. Designed for production Linux systems with PCI DSS Requirement 11.5 compliance in mind, and built to run with no external dependencies beyond standard GNU/Linux tools.
 
