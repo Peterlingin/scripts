@@ -429,10 +429,10 @@ FIM directly addresses **PCI DSS Requirement 11.5** - *Deploy a change-detection
 
 | PCI DSS Sub-requirement | How FIM addresses it |
 |------------------------|----------------------|
-| 11.5.1 - Deploy a change-detection mechanism | SHA-256 baseline comparison on every run |
-| 11.5.1 - Alert personnel to unauthorised changes | Syslog `auth.warning` + optional email alert |
-| 11.5.1 - Cover critical system files | `/etc`, `/bin`, `/sbin`, `/usr/bin`, `/usr/sbin` monitored by default |
-| 11.5.1 - Perform comparisons at least weekly | Enforced via cron - see CI/CD section |
+| 11.5.2 - Deploy a change-detection mechanism | SHA-256 baseline comparison on every run |
+| 11.5.2 - Alert personnel to unauthorised changes | Syslog `auth.warning` + optional email alert |
+| 11.5.2 - Cover critical system files | `/etc`, `/bin`, `/sbin`, `/usr/bin`, `/usr/sbin` monitored by default |
+| 11.5.2 - Perform comparisons at least weekly | Enforced via cron - see CI/CD section |
 | 11.5.2 - Respond to alerts | Exit code 1 enables automated pipeline response |
 
 The audit log provides the tamper-evident record of all checks and findings that an assessor will request as evidence.
