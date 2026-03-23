@@ -425,7 +425,7 @@ If a custom paths file is used, it should be immutable. An attacker who can modi
 
 ## PCI DSS Compliance
 
-FIM directly addresses **PCI DSS Requirement 11.5** - *Deploy a change-detection mechanism to alert personnel to unauthorised modification of critical system files, configuration files, or content files.*
+FIM directly addresses **PCI DSS version 4.0.1 requirement 11.5** - *Deploy a change-detection mechanism to alert personnel to unauthorised modification of critical system files, configuration files, or content files.*
 
 | PCI DSS Sub-requirement | How FIM addresses it |
 |------------------------|----------------------|
