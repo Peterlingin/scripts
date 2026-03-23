@@ -1,4 +1,4 @@
-# FIM - File Integrity Monitor
+# fim - File Integrity Monitor (FIM)
 
 A lightweight, zero-dependency Bash script that detects unauthorised changes to critical system files by comparing SHA-256 hashes against a trusted baseline. Designed for production Linux systems with PCI DSS Requirement 11.5 compliance in mind, and built to run with no external dependencies beyond standard GNU/Linux tools.
 
@@ -31,7 +31,7 @@ A lightweight, zero-dependency Bash script that detects unauthorised changes to 
 
 ## Why It Exists
 
-Enterprise FIM solutions like AIDE and Tripwire are powerful but come with a significant operational burden — complex configuration, heavyweight dependencies, and licensing costs that put them out of reach for small teams and startups. Yet PCI DSS Requirement 11.5 applies regardless of company size.
+Enterprise FIM solutions like AIDE and Tripwire are powerful but come with a significant operational burden - complex configuration, heavyweight dependencies, and licensing costs that put them out of reach for small teams and startups. Yet PCI DSS Requirement 11.5 applies regardless of company size.
 
 FIM fills that gap: a single self-contained script, deployable in minutes, that covers the core requirement with no package installation, no daemon, and no licence fee. It is not a replacement for enterprise solutions on large or complex infrastructures, but it is a fully legitimate and auditable implementation of the requirement for systems where simplicity and transparency matter.
 
@@ -42,13 +42,13 @@ FIM fills that gap: a single self-contained script, deployable in minutes, that 
 | Dependency | Notes |
 |------------|-------|
 | `bash` ≥ 4.0 | Pre-installed on all modern Linux distributions |
-| `sha256sum` | Part of GNU coreutils — present on all Debian/RHEL-based systems |
+| `sha256sum` | Part of GNU coreutils - present on all Debian/RHEL-based systems |
 | `find` | Part of GNU findutils |
-| `stat` | Part of GNU coreutils — cross-platform (Linux and macOS) |
+| `stat` | Part of GNU coreutils - cross-platform (Linux and macOS) |
 | `awk` | Used for single-pass baseline comparison and entropy calculation |
-| `logger` | Part of util-linux — used for syslog integration |
-| `chattr` | Part of e2fsprogs — used for append-only audit log protection (Linux only) |
-| `mail` | Optional — only required if `--email` is used |
+| `logger` | Part of util-linux - used for syslog integration |
+| `chattr` | Part of e2fsprogs - used for append-only audit log protection (Linux only) |
+| `mail` | Optional - only required if `--email` is used |
 
 No Python, no Node.js, no package manager. Everything is available on a standard Debian or RHEL installation out of the box.
 
@@ -81,12 +81,12 @@ fim.sh [--init | --check] [OPTIONS]
 
 The script operates in two modes. `--init` builds or rebuilds the trusted baseline. `--check` compares the current state of the filesystem against that baseline and reports any differences.
 
-**First run — build the baseline:**
+**First run - build the baseline:**
 ```bash
 sudo ./fim.sh --init
 ```
 
-**Subsequent runs — check integrity:**
+**Subsequent runs - check integrity:**
 ```bash
 sudo ./fim.sh --check
 ```
@@ -107,15 +107,15 @@ sudo ./fim.sh --check --email soc@company.com
 
 | Flag | Argument | Default | Description |
 |------|----------|---------|-------------|
-| `--init` | — | — | Create or rebuild the baseline database |
-| `--check` | — | — | Compare current state against baseline (default) |
+| `--init` | - | - | Create or rebuild the baseline database |
+| `--check` | - | - | Compare current state against baseline (default) |
 | `--baseline` | `FILE` | `/var/lib/fim/baseline.db` | Use a custom baseline file path |
 | `--paths` | `FILE` | *(built-in)* | Load monitored paths from a custom file |
 | `--report` | `FILE` | *(none)* | Save findings to a CSV report file |
 | `--email` | `ADDRESS` | *(none)* | Send alert email on findings |
-| `--exclude` | `GLOB` | *(none)* | Exclude files whose **filename** matches GLOB pattern — matched against filename only, not full path (repeatable) |
-| `-q` | — | `false` | Quiet mode — suppress banner and info output |
-| `-h` | — | — | Print help and exit |
+| `--exclude` | `GLOB` | *(none)* | Exclude files whose **filename** matches GLOB pattern - matched against filename only, not full path (repeatable) |
+| `-q` | - | `false` | Quiet mode - suppress banner and info output |
+| `-h` | - | - | Print help and exit |
 
 ---
 
@@ -149,7 +149,7 @@ sudo ./fim.sh --check --exclude "resolv.conf"
 
 **Important limitations to understand:**
 
-The pattern is matched against the filename part only. `--exclude "/etc/resolv.conf"` will not work — `find` will never match a full path with the `-name` flag. To exclude a specific file at a specific path (e.g. only `/etc/resolv.conf` but not `/backup/resolv.conf`), the correct approach is to use a custom `--paths` file that structures the monitored scope more narrowly, avoiding the noisy directory or file entirely.
+The pattern is matched against the filename part only. `--exclude "/etc/resolv.conf"` will not work - `find` will never match a full path with the `-name` flag. To exclude a specific file at a specific path (e.g. only `/etc/resolv.conf` but not `/backup/resolv.conf`), the correct approach is to use a custom `--paths` file that structures the monitored scope more narrowly, avoiding the noisy directory or file entirely.
 
 `--exclude` is designed for broad, filename-based exclusions such as log files, temporary files, or editor artefacts that appear across many directories. It is not a substitute for careful path selection.
 
@@ -165,19 +165,19 @@ The pattern is matched against the filename part only. `--exclude "/etc/resolv.c
 
 ## How It Works
 
-1. **Build the baseline (`--init`)** — scans all monitored paths recursively, computes the SHA-256 hash of every file, and writes the results to the baseline database. An audit log entry is written and a meta checksum of the baseline is stored in `fim_meta.sha256`. The audit log is set to append-only via `chattr +a`.
+1. **Build the baseline (`--init`)** - scans all monitored paths recursively, computes the SHA-256 hash of every file, and writes the results to the baseline database. An audit log entry is written and a meta checksum of the baseline is stored in `fim_meta.sha256`. The audit log is set to append-only via `chattr +a`.
 
-2. **Verify tamper integrity (`--check`)** — before doing anything else, recomputes the SHA-256 of `baseline.db` and compares it against the stored value in `fim_meta.sha256`. If they don't match, the run aborts immediately with a `TAMPER` alert and exits with code 2.
+2. **Verify tamper integrity (`--check`)** - before doing anything else, recomputes the SHA-256 of `baseline.db` and compares it against the stored value in `fim_meta.sha256`. If they don't match, the run aborts immediately with a `TAMPER` alert and exits with code 2.
 
-3. **Scan the filesystem** — rescans all monitored paths using the same method as `--init`, producing a fresh set of hashes.
+3. **Scan the filesystem** - rescans all monitored paths using the same method as `--init`, producing a fresh set of hashes.
 
-4. **Compare against baseline** — a single `awk` pass compares the two hash sets and categorises every difference as `ADDED`, `DELETED`, or `MODIFIED`.
+4. **Compare against baseline** - a single `awk` pass compares the two hash sets and categorises every difference as `ADDED`, `DELETED`, or `MODIFIED`.
 
-5. **Report findings** — each finding is printed to the terminal with colour-coded severity, file metadata (permissions, owner, modification time), and old/new hashes for modified files. Every finding is also written individually to the audit log.
+5. **Report findings** - each finding is printed to the terminal with colour-coded severity, file metadata (permissions, owner, modification time), and old/new hashes for modified files. Every finding is also written individually to the audit log.
 
-6. **Log to syslog** — a single summary line is sent to syslog via `logger` regardless of whether findings exist. Clean runs log at `auth.info`, findings log at `auth.warning`, and tamper events log at `auth.crit`.
+6. **Log to syslog** - a single summary line is sent to syslog via `logger` regardless of whether findings exist. Clean runs log at `auth.info`, findings log at `auth.warning`, and tamper events log at `auth.crit`.
 
-7. **Update meta checksum** — after writing the audit log, the meta checksum of `baseline.db` is refreshed so the next run has an accurate reference.
+7. **Update meta checksum** - after writing the audit log, the meta checksum of `baseline.db` is refreshed so the next run has an accurate reference.
 
 ---
 
@@ -187,12 +187,12 @@ The following paths are monitored by default, aligned with PCI DSS Requirement 1
 
 | Path | Rationale |
 |------|-----------|
-| `/etc` | System configuration — passwd, sudoers, cron, SSH keys |
+| `/etc` | System configuration - passwd, sudoers, cron, SSH keys |
 | `/bin` | Essential user binaries |
 | `/sbin` | Essential system binaries |
 | `/usr/bin` | User binaries including compilers and interpreters |
 | `/usr/sbin` | System administration binaries |
-| `/var/www` | Web root — a primary target for web-based attacks |
+| `/var/www` | Web root - a primary target for web-based attacks |
 
 To monitor additional or different paths, create a plain text file with one path per line and pass it with `--paths`:
 
@@ -227,7 +227,7 @@ Each finding is printed as a colour-coded block:
              Perms: -rw-r--r--  Owner: root  Modified: 2026-03-21 11:42:01
 
   [ADDED]    /etc/cron.d/backdoor
-             New file — not present in baseline
+             New file - not present in baseline
 
   [DELETED]  /usr/bin/sudo
              File has been removed since baseline
@@ -243,19 +243,19 @@ Each finding is printed as a colour-coded block:
 
 The audit log at `/var/lib/fim/fim_audit.log` records every event in a structured, append-only format. It contains two types of entries:
 
-**Run summary** — one line per execution:
+**Run summary** - one line per execution:
 ```
 2026-03-21 11:00:01 | host=webserver01 | action=CHECK | added=0 | modified=1 | deleted=0 | total=1 | baseline=/var/lib/fim/baseline.db
 ```
 
-**Finding detail** — one line per changed file:
+**Finding detail** - one line per changed file:
 ```
 2026-03-21 11:00:01 | host=webserver01 | action=CHECK | change=MODIFIED | file=/etc/passwd | old=a1b2c3... | new=f6e5d4...
 2026-03-21 11:00:01 | host=webserver01 | action=CHECK | change=ADDED | file=/etc/cron.d/backdoor
 2026-03-21 11:00:01 | host=webserver01 | action=CHECK | change=DELETED | file=/usr/bin/sudo
 ```
 
-The audit log is protected at the filesystem level with `chattr +a` (append-only) set automatically on first `--init`. This means even root cannot overwrite or truncate it without first removing the attribute — an action which itself leaves traces.
+The audit log is protected at the filesystem level with `chattr +a` (append-only) set automatically on first `--init`. This means even root cannot overwrite or truncate it without first removing the attribute - an action which itself leaves traces.
 
 ### Syslog Integration
 
@@ -264,8 +264,8 @@ FIM writes to syslog via `logger` on every run. All entries are tagged with `fim
 | Event | Facility/Priority | Status field |
 |-------|-------------------|--------------|
 | Baseline initialised | `auth.notice` | `action=INIT` |
-| Check — no changes | `auth.info` | `status=CLEAN` |
-| Check — changes found | `auth.warning` | `status=ALERT` |
+| Check - no changes | `auth.info` | `status=CLEAN` |
+| Check - changes found | `auth.warning` | `status=ALERT` |
 | Tamper detected | `auth.crit` | `status=TAMPER` |
 
 **Useful syslog queries:**
@@ -303,9 +303,9 @@ When `--report FILE` is specified, a CSV file is written with one row per findin
 
 | Code | Meaning |
 |------|---------|
-| `0` | Clean — no changes detected |
-| `1` | Alert — one or more changes detected |
-| `2` | Tamper — baseline or meta checksum integrity failure |
+| `0` | Clean - no changes detected |
+| `1` | Alert - one or more changes detected |
+| `2` | Tamper - baseline or meta checksum integrity failure |
 
 ---
 
@@ -337,7 +337,7 @@ FIM protects its own evidence files against tampering through a chain of trust:
 
 Proper hardening of FIM's own files is essential. The following recommendations are listed in order of importance.
 
-### `fim_meta.sha256` — the seal
+### `fim_meta.sha256` - the seal
 
 This is the most security-critical file. If an attacker can modify it, they can update it after tampering with the baseline and the tamper check will pass silently.
 
@@ -357,12 +357,12 @@ chmod 400 /mnt/fim-evidence/fim_meta.sha256
 
 | Option | Protection level | Notes |
 |--------|-----------------|-------|
-| Read-only mount (`/mnt/fim-evidence`) | Highest | Requires remount to modify — leaves kernel traces |
+| Read-only mount (`/mnt/fim-evidence`) | Highest | Requires remount to modify - leaves kernel traces |
 | Separate partition with restricted permissions | High | Good for most production systems |
 | `chattr +i` (immutable) | Medium | Root can remove the attribute, but it requires a deliberate action |
 | Same directory as baseline | Lowest | Acceptable for non-critical systems only |
 
-### `fim_audit.log` — the evidence trail
+### `fim_audit.log` - the evidence trail
 
 The audit log is automatically set to append-only with `chattr +a` on first `--init`. This is handled by the script. Verify it is active with:
 
@@ -383,7 +383,7 @@ sudo chattr +a /var/lib/fim/fim_audit.log   # re-apply append-only
 
 **For maximum protection**, ship audit log entries to a remote syslog server or centralised SIEM in real time. An attacker who compromises the local machine cannot retroactively alter what has already been sent.
 
-### `baseline.db` — the reference
+### `baseline.db` - the reference
 
 ```bash
 chown root:root /var/lib/fim/baseline.db
@@ -392,7 +392,7 @@ chmod 400 /var/lib/fim/baseline.db
 
 The baseline should be readable only by root. Write access is only needed during `--init` runs.
 
-### `fim.sh` — the script itself
+### `fim.sh` - the script itself
 
 ```bash
 chown root:root /opt/fim/fim.sh
@@ -401,7 +401,7 @@ chmod 700 /opt/fim/fim.sh
 
 Only root should be able to read or execute the script. This prevents non-privileged users from inspecting the monitoring logic or the paths being watched.
 
-### `/etc/fim/paths.conf` — custom paths file (if used)
+### `/etc/fim/paths.conf` - custom paths file (if used)
 
 ```bash
 chown root:root /etc/fim/paths.conf
@@ -415,8 +415,8 @@ If a custom paths file is used, it should be immutable. An attacker who can modi
 
 | File | Owner | Permissions | Extra protection |
 |------|-------|-------------|-----------------|
-| `fim.sh` | `root:root` | `700` | — |
-| `baseline.db` | `root:root` | `400` | — |
+| `fim.sh` | `root:root` | `700` | - |
+| `baseline.db` | `root:root` | `400` | - |
 | `fim_meta.sha256` | `root:root` | `400` | Read-only mount or separate partition |
 | `fim_audit.log` | `root:root` | `600` | `chattr +a` (auto-applied) |
 | `paths.conf` | `root:root` | `400` | `chattr +i` |
@@ -425,15 +425,15 @@ If a custom paths file is used, it should be immutable. An attacker who can modi
 
 ## PCI DSS Compliance
 
-FIM directly addresses **PCI DSS Requirement 11.5** — *Deploy a change-detection mechanism to alert personnel to unauthorised modification of critical system files, configuration files, or content files.*
+FIM directly addresses **PCI DSS Requirement 11.5** - *Deploy a change-detection mechanism to alert personnel to unauthorised modification of critical system files, configuration files, or content files.*
 
 | PCI DSS Sub-requirement | How FIM addresses it |
 |------------------------|----------------------|
-| 11.5.1 — Deploy a change-detection mechanism | SHA-256 baseline comparison on every run |
-| 11.5.1 — Alert personnel to unauthorised changes | Syslog `auth.warning` + optional email alert |
-| 11.5.1 — Cover critical system files | `/etc`, `/bin`, `/sbin`, `/usr/bin`, `/usr/sbin` monitored by default |
-| 11.5.1 — Perform comparisons at least weekly | Enforced via cron — see CI/CD section |
-| 11.5.2 — Respond to alerts | Exit code 1 enables automated pipeline response |
+| 11.5.1 - Deploy a change-detection mechanism | SHA-256 baseline comparison on every run |
+| 11.5.1 - Alert personnel to unauthorised changes | Syslog `auth.warning` + optional email alert |
+| 11.5.1 - Cover critical system files | `/etc`, `/bin`, `/sbin`, `/usr/bin`, `/usr/sbin` monitored by default |
+| 11.5.1 - Perform comparisons at least weekly | Enforced via cron - see CI/CD section |
+| 11.5.2 - Respond to alerts | Exit code 1 enables automated pipeline response |
 
 The audit log provides the tamper-evident record of all checks and findings that an assessor will request as evidence.
 
@@ -441,7 +441,7 @@ The audit log provides the tamper-evident record of all checks and findings that
 
 ## CI/CD Integration
 
-### Cron — recommended for PCI DSS compliance
+### Cron - recommended for PCI DSS compliance
 
 PCI DSS requires checks at least weekly. Daily is recommended:
 
@@ -490,17 +490,17 @@ fim-check:
 
 ## Limitations
 
-**Regex-based path matching** — the `--exclude` option uses glob patterns, not regular expressions. Complex exclusion rules may require multiple `--exclude` flags.
+**Regex-based path matching** - the `--exclude` option uses glob patterns, not regular expressions. Complex exclusion rules may require multiple `--exclude` flags.
 
-**No whitelisting** — files that change frequently (e.g. `/etc/resolv.conf`, `/etc/mtab`) will generate alerts on every run. The recommended approach is to exclude noisy paths from the monitored scope via `--paths` rather than whitelisting expected changes after detection. This keeps the detection surface clean and avoids introducing a new attack surface.
+**No whitelisting** - files that change frequently (e.g. `/etc/resolv.conf`, `/etc/mtab`) will generate alerts on every run. The recommended approach is to exclude noisy paths from the monitored scope via `--paths` rather than whitelisting expected changes after detection. This keeps the detection surface clean and avoids introducing a new attack surface.
 
-**Root requirement** — scanning system paths and writing to `/var/lib/fim/` requires root. Use `--baseline ./fim_baseline.db` for non-root testing.
+**Root requirement** - scanning system paths and writing to `/var/lib/fim/` requires root. Use `--baseline ./fim_baseline.db` for non-root testing.
 
-**Not a replacement for enterprise FIM** — on large or complex infrastructures with hundreds of servers, a centralised solution with a proper management console (AIDE, Tripwire, OSSEC/Wazuh) is more appropriate. FIM is designed for single-server or small-fleet deployments.
+**Not a replacement for enterprise FIM** - on large or complex infrastructures with hundreds of servers, a centralised solution with a proper management console (AIDE, Tripwire, OSSEC/Wazuh) is more appropriate. FIM is designed for single-server or small-fleet deployments.
 
-**Snapshot-based, not real-time** — FIM detects changes between runs. A file modified and then restored between two runs will not be detected. For real-time detection, consider combining FIM with `auditd` or Linux inotify-based monitoring.
+**Snapshot-based, not real-time** - FIM detects changes between runs. A file modified and then restored between two runs will not be detected. For real-time detection, consider combining FIM with `auditd` or Linux inotify-based monitoring.
 
-**Local tamper protection only** — `chattr +a` and `fim_meta.sha256` protect against casual tampering but not against a determined attacker with root access who is aware of the tool. For maximum assurance, ship audit log entries and meta checksums to a remote, write-once destination.
+**Local tamper protection only** - `chattr +a` and `fim_meta.sha256` protect against casual tampering but not against a determined attacker with root access who is aware of the tool. For maximum assurance, ship audit log entries and meta checksums to a remote, write-once destination.
 
 ---
 
