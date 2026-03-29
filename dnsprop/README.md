@@ -5,9 +5,6 @@ A smart DNS propagation checker for the terminal. After a DNS record change,
 status dashboard, and exits automatically the moment consensus is reached
 across all resolvers.
 
-Part of a sysadmin toolkit series alongside `secrethunt.sh` (shell history
-secrets scanner) and `fim.sh` (PCI DSS file integrity monitor).
-
 ---
 
 ## Features
