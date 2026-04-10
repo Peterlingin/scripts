@@ -1,16 +1,16 @@
 # Serve-Files.ps1
 
-A lightweight HTTP file server for Windows, written in PowerShell. No dependencies, no install. Just run it and share files instantly over your local network.
+A lightweight HTTP file server for Windows, written in PowerShell. No dependencies, no install: just run it and share files instantly over your local network.
 
 ## Features
 
-- **Directory browsing** — clean dark UI with file type icons
-- **File downloads** — click any file to download it
-- **Folder zip download** — hover a folder and download its entire contents as a `.zip`, generated on the fly
-- **File upload** — drag and drop files into any directory from the browser, with per-file progress bars
-- **Live filter** — type to instantly narrow down large directories
-- **Basic auth** — optional username/password protection
-- **Request logging** — timestamped log file with method, status, response time, and bytes transferred
+- **Directory browsing**: clean dark UI with file type icons
+- **File downloads**: click any file to download it
+- **Folder zip download**: hover a folder and download its entire contents as a `.zip`, generated on the fly
+- **File upload**: drag and drop files into any directory from the browser, with per-file progress bars
+- **Live filter**: type to instantly narrow down large directories
+- **Basic auth**: optional username/password protection
+- **Request logging**: timestamped log file with method, status, response time, and bytes transferred
 
 ## Usage
 
@@ -66,7 +66,7 @@ Each request is logged as a tab-aligned line:
 
 ## Notes
 
-- Run as **Administrator** if you get a permissions error on startup — Windows requires elevated rights to open HTTP listeners.
+- Run as **Administrator** if you get a permissions error on startup: Windows requires elevated rights to open HTTP listeners.
 - If PowerShell refuses to run the script, allow it for the current session first:
   ```powershell
   Set-ExecutionPolicy -Scope Process Bypass
