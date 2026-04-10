@@ -8,4 +8,5 @@ A bunch of scripts in different languages to make some useful things. Look at th
 - 📊 **nparse**: a Bash script that parses Nmap plain-text output files and produces a clean, easy-to-read report.
 - 🔗 **dnsprop**: a smart DNS propagation checker for the terminal.
 - 🛡️ **fim**: a lightweight, zero-dependency Bash script that detects unauthorised changes to critical system files.
+- 🍪 **tracker_analyzer**: a local, scriptable, privacy-preserving website tracker scanner.
 
