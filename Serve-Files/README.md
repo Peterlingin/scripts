@@ -73,3 +73,4 @@ Each request is logged as a tab-aligned line:
   ```
 - The server is **read-only by default** except for the upload endpoint. Files outside the served folder are never accessible (path traversal is blocked).
 - Zip downloads are buffered in memory before sending, so avoid zipping very large folders.
+- The script is meant to be used occasionally to transfer small files. Do not expect great performance.
