@@ -80,7 +80,7 @@ The recommended starting file is:
 10k-most-common.txt
 ```
 
-You can download it directly with PowerShell:
+You can download it directly with PowerShell (or there's a copy here, if you prefer):
 
 ```powershell
 Invoke-WebRequest `
