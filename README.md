@@ -5,6 +5,7 @@ A bunch of scripts in different languages to make some useful things. Look at th
 | Script Name | Description |
 | :--- | :--- |
 | 🔒&nbsp;**Check-PwnedPassword** | A secure PowerShell function that checks if passwords have been compromised in known data breaches. |
+| 🔒&nbsp;**Test Password** | A security-hardened PowerShell script that evaluates the quality of a password against modern security standards. |
 | 🛡️&nbsp;**SSL&nbsp;Certificate&nbsp;Checker** | A Bash script that validates SSL/TLS certificates. |
 | 🪵&nbsp;**Log&nbsp;Volume&nbsp;Calculator** | A PowerShell script designed to help IT professionals project storage requirements for log data. |
 | 🧹&nbsp;**SecretHunt** | A fast, zero-dependency Bash script that hunts for leaked secrets and credentials hiding in your shell history files. |
