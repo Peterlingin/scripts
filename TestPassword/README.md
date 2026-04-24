@@ -331,7 +331,7 @@ OWASP maintains practical web application security guidance. Its password requir
 
 The Center for Internet Security targets enterprise environments and sets a higher baseline.
 
-### PCI-DSS v4
+### PCI DSS v4
 
 **Pass conditions:** length >= 12, at least one special symbol present.
 
@@ -376,7 +376,7 @@ Being transparent about what the script cannot do is part of using it responsibl
 - [NIST SP 800-63B -- Digital Identity Guidelines](https://pages.nist.gov/800-63-3/sp800-63b.html)
 - [OWASP Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 - [CIS Controls v8](https://www.cisecurity.org/controls/v8)
-- [PCI-DSS v4.0](https://www.pcisecuritystandards.org/document_library/)
+- [PCI DSS v4.0](https://www.pcisecuritystandards.org/document_library/)
 - [Have I Been Pwned k-Anonymity API](https://haveibeenpwned.com/API/v3#SearchingPwnedPasswordsByRange)
 - [SecLists -- Common Credentials](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Common-Credentials)
 - [Dropbox zxcvbn -- realistic password strength estimation](https://github.com/dropbox/zxcvbn)
